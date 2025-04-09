@@ -1,15 +1,15 @@
 import {Page} from "@playwright/test";
 
-enum WidgetPageSelectors {
-    WRAPPER = '.sc-dino-typography-h > [class^=widget__]',
-    WIDGET_BODY = '[class^=widgetWrapper] > [class^=widget__]',
-    HEADER_TEXT = 'header h5',
-    BUTTON_OPEN = '[data-test=openWidget]',
-    BUTTON_WRITE_TO_US = '[class^=btn]',
-    ARTICLE_POPULAR_TITLE = '[class^=popularTitle__]',
-    ARTICLE_POPULAR_LIST = `${ARTICLE_POPULAR_TITLE} + ul[class^=articles__]`,
-    ARTICLE_POPULAR_LIST_ITEM = `${ARTICLE_POPULAR_LIST} > li`,
-}
+const WidgetPageSelectors = {
+    WRAPPER: '.sc-dino-typography-h > [class^=widget__]',
+    WIDGET_BODY: '[class^=widgetWrapper] > [class^=widget__]',
+    HEADER_TEXT: 'header h5',
+    BUTTON_OPEN: '[data-test=openWidget]',
+    BUTTON_WRITE_TO_US: '[class^=btn]',
+    ARTICLE_POPULAR_TITLE: '[class^=popularTitle__]',
+    ARTICLE_POPULAR_LIST: '[class^=popularTitle__] + ul[class^=articles__]',
+    ARTICLE_POPULAR_LIST_ITEM: '[class^=popularTitle__] + ul[class^=articles__] > li',
+} as const
 
 export class WidgetPage {
     static selector = WidgetPageSelectors;
