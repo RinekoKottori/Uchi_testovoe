@@ -10,6 +10,9 @@ const WidgetPageSelectors = {
     ARTICLE_POPULAR_TITLE: '[class^=popularTitle__8Pi-v]',
     ARTICLE_POPULAR_LIST: '[class^=popularTitle__8Pi-v] + ul[class^=articles__dgKpa]',
     ARTICLE_POPULAR_LIST_ITEM: '[class^=popularTitle__8Pi-v] + ul[class^=articles__dgKpa] > li.article__6zuSl',
+
+    BUTTON_CLOSE: '[class^=closeBtn__UZ4Ws]',
+    HELP_MENU: ' div:nth-child(19)'
 } as const
 
 export class WidgetPage {
@@ -42,5 +45,16 @@ export class WidgetPage {
     getWidgetBody() {
         return this.page.locator(WidgetPage.selector.WIDGET_BODY);
     }
+
+    clickButtonClose() {
+        return this.page.locator(WidgetPage.selector.BUTTON_CLOSE).click();
+    }
+
+   async getClassHelper(){
+       const locator = this.page.locator(WidgetPage.selector.HELP_MENU);
+       const classList = await locator.getAttribute('class');
+       expect(classList).toBeNull();
+   }
+
 }
 
