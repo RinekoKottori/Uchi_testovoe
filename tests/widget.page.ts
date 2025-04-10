@@ -1,14 +1,15 @@
-import {Page} from "@playwright/test";
+import {Page, expect, list} from "@playwright/test";
+
 
 const WidgetPageSelectors = {
     WRAPPER: '.sc-dino-typography-h > [class^=widget__]',
     WIDGET_BODY: '[class^=widgetWrapper] > [class^=widget__]',
     HEADER_TEXT: 'header h5',
     BUTTON_OPEN: '[data-test=openWidget]',
-    BUTTON_WRITE_TO_US: '[class^=btn]',
-    ARTICLE_POPULAR_TITLE: '[class^=popularTitle__]',
-    ARTICLE_POPULAR_LIST: '[class^=popularTitle__] + ul[class^=articles__]',
-    ARTICLE_POPULAR_LIST_ITEM: '[class^=popularTitle__] + ul[class^=articles__] > li',
+    BUTTON_WRITE_TO_US: '[class^=btnText__fCHf9]',
+    ARTICLE_POPULAR_TITLE: '[class^=popularTitle__8Pi-v]',
+    ARTICLE_POPULAR_LIST: '[class^=popularTitle__8Pi-v] + ul[class^=articles__dgKpa]',
+    ARTICLE_POPULAR_LIST_ITEM: '[class^=popularTitle__8Pi-v] + ul[class^=articles__dgKpa] > li.article__6zuSl',
 } as const
 
 export class WidgetPage {
@@ -25,7 +26,9 @@ export class WidgetPage {
     }
 
     async getPopularArticles() {
-        return this.wrapper().locator(WidgetPage.selector.ARTICLE_POPULAR_LIST_ITEM).all()
+        const list = this.wrapper().locator(WidgetPage.selector.ARTICLE_POPULAR_LIST_ITEM);
+        await expect(list).toHaveCount(5, {timeout: 10000});
+        return list.all();
     }
 
     async clickWriteToUs() {
